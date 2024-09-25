@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNS - 多機能ウェブサイト</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>SNS</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="games.html">ゲーム</a></li>
+                <li><a href="shop.html">買い物</a></li>
+                <li><a href="membership.html">会員</a></li>
+                <li><a href="services.html">サービス紹介</a></li>
+                <li><a href="sns.html">SNS</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="profileSection">
+            <h2>プロフィール</h2>
+            <div id="profile">
+                <img src="default-avatar.png" alt="プロフィール画像" id="profileImage">
+                <h3 id="username">ユーザー名</h3>
+                <button onclick="followUser()">フォローする</button>
+            </div>
+        </section>
+        <section id="createPostSection">
+            <h2>新しい投稿を作成</h2>
+            <textarea id="postContent" rows="4" cols="50" placeholder="何を考えていますか？"></textarea>
+            <button onclick="createPost()">投稿</button>
+        </section>
+        <section id="postsSection">
+            <h2>投稿</h2>
+            <div id="posts">
+                <!-- 投稿がここに表示されます -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 多機能ウェブサイト. All rights reserved.</p>
+    </footer>
+    <script src="sns.js"></script>
+</body>
+</html>

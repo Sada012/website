@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゲーム - 多機能ウェブサイト</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>ゲーム</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="games.html">ゲーム</a></li>
+                <li><a href="shop.html">買い物</a></li>
+                <li><a href="membership.html">会員</a></li>
+                <li><a href="services.html">サービス紹介</a></li>
+		<li><a href="sns.html">SNS</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>チェス</h2>
+            <p>ここでチェスをプレイしましょう。</p>
+            <div id="chessGameArea">
+                <button onclick="startChessGame()">チェスを開始</button>
+            </div>
+        </section>
+        <section>
+            <h2>ポーカー</h2>
+            <p>ここでポーカーをプレイしましょう。</p>
+            <div id="pokerGameArea">
+                <button onclick="startPokerGame()">ポーカーを開始</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 多機能ウェブサイト. All rights reserved.</p>
+    </footer>
+    <script src="games.js"></script>
+</body>
+</html>
