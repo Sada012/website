@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ウェブページ</title>
+    <style>
+        body {
+            font-family: 'Arial, sans-serif';
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f9;
+            scroll-behavior: smooth;
+	padding-top: 50px;
+        }
+        header {
+            background: linear-gradient(135deg, #6c5ce7, #5f27cd);
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+            position: relative;
+            overflow: hidden;
+	    
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #5f27cd;
+            padding: 1em 2em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 3px;
+            background: white;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        nav .menu-icon {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        nav .menu-icon div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+        @media (max-width: 768px) {
+            nav a {
+                display: none;
+            }
+            nav .menu-icon {
+                display: flex;
+            }
+            nav .menu.active a {
+                display: block;
+                margin: 15px 0;
+                text-align: center;
+            }
+        }
+        .container {
+            padding: 2em;
+            max-width: 1200px;
+            margin: 70px auto 0; /* Adjust for fixed navbar */
+        }
+        .hero {
+            background-image: url('https://dora-neco.com/img/L/whitecat007.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hero h1 {
+            font-size: 3em;
+            z-index: 1;
+            animation: fadeIn 2s ease-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2em;
+            margin-top: 2em;
+        }
+        .content .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            flex: 1 1 calc(33.333% - 2em);
+            min-width: 280px;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .content .card:hover {
+            transform: scale(1.05);
+        }
+        .content .card img {
+            width: 100%;
+            height: 220px;
+        }
+        .content .card .card-body {
+            padding: 1em;
+        }
+        .content .card .card-body h3 {
+            margin: 0 0 0.5em;
+            position: relative;
+            display: inline-block;
+        }
+        .content .card .card-body h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 3px;
+            background: #6c5ce7;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        .content .card:hover .card-body h3::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .accordion {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 1em;
+        }
+        .accordion h3 {
+            margin: 0;
+            padding: 1em;
+            background-color: #6c5ce7;
+            color: white;
+            cursor: pointer;
+        }
+        .accordion .content {
+            display: none;
+            padding: 1em;
+        }
+        .accordion.active .content {
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .slider {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1200px;
+            margin: 2em auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .slide img {
+            width: 100%;
+	    height: 440px;
+            display: block;
+	    object-fit: cover;
+        }
+        .tabs {
+            margin-top: 2em;
+        }
+        .tabs nav {
+            display: flex;
+            justify-content: space-between;
+            background-color: #6c5ce7;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .tabs nav a {
+            flex: 1;
+            padding: 1em;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            background: #6c5ce7;
+            transition: background 0.3s;
+        }
+        .tabs nav a.active, .tabs nav a:hover {
+            background: #5f27cd;
+        }
+        .tab-content {
+            padding: 2em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2em;
+            margin-top: 2em;
+        }
+        .form-group {
+            margin-bottom: 1em;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5em;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .form-group button {
+            padding: 0.75em 1.5em;
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #5f27cd;
+        }
+        .toast {
+            visibility: hidden;
+            max-width: 50px;
+            height: 50px;
+            margin-left: -125px;
+            margin: 0 auto;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            white-space: nowrap;
+        }
+        .toast.show {
+            visibility: visible;
+            max-width: 250px;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+        .footer {
+            background: linear-gradient(135deg, #6c5ce7, #5f27cd);
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+            margin-top: 2em;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .content .card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>NEKO</h1>
+    </header>
+    <nav>
+        <div class="logo">LOGO</div>
+        <div class="menu">
+            <a href="#home">ホーム</a>
+            <a href="#about">アバウト</a>
+            <a href="#services">サービス</a>
+            <a href="#contact">コンタクト</a>
+	    <a> </a>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="hero">
+            <h1>ようこそ！</h1>
+        </div>
+        <div class="slider">
+            <div class="slides">
+                <div class="slide">
+                    <img src="https://user0514.cdnw.net/shared/img/thumb/tomcatDSC09085_TP_V.jpg" alt="スライド1">
+                </div>
+                <div class="slide">
+                    <img src="https://user0514.cdnw.net/shared/img/thumb/nekocyanPAKE4531-439_TP_V4.jpg?w=500,h=auto" alt="スライド2">
+                </div>
+                <div class="slide">
+                    <img src="https://user0514.cdnw.net/shared/img/thumb/nekocyanPAKE4500-430_TP_V4.jpg?w=500,h=auto" alt="スライド3">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMWcV8Xej_zsk82n8y95uj3IaJpLUECUEmeg&s" alt="サンプル画像">
+                <div class="card-body">
+                    <h3>ペルシャ</h3>
+                    <p>「ペルシャ（英語表記：Persian）」は、ゴージャスな皮毛の長毛種で、古くからキャットショーの常連の見た目も華やかな猫種です。</p>
+                    <button onclick="openModal()">詳細を見る</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqp3_HWWVhsKrJQWKWfRRjq2pDK1-X6OpzIQ&s" alt="サンプル画像">
+                <div class="card-body">
+                    <h3>スコティッシュフォールド</h3>
+                    <p>アニコム損害保険株式会社が毎年発表している「猫の人気品種ランキング」でも12連覇を達成するなど不動の人気が続いているスコティッシュ・フォールド。愛らしい丸顔、全体的に丸みをおびた体が特徴的です。</p>
+                    <button onclick="openModal()">詳細を見る</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://www.pet-ss.com/cwp/wp-content/uploads/2020/06/1800805_m-600x400.jpg" alt="サンプル画像">
+                <div class="card-body">
+                    <h3>アメリカン・ショートヘア</h3>
+                    <p>その名の通り、アメリカ出身の短い毛がびっしりと生えた猫、アメリカン・ショートヘアーは、しっかりとした体つきが特徴です。瞳はくりんとしたアーモンド型。その瞳に見つめられると、思わず抱きしめたくなるような可愛らしさが特徴です。</p>
+                    <button onclick="openModal()">詳細を見る</button>
+                </div>
+            </div>
+        </div>
+	<br>
+        <div class="accordion">
+            <h3 onclick="toggleAccordion(this)">ネコちゃんを迎える上での心構え</h3>
+            <div class="content">
+                <p>ネコちゃんは安全で健康に暮らせる環境だと比較的長く生きる動物で、中には20年前後生きる長寿の猫種もいます。そのため、ネコちゃんを飼う上では、一生をかけて面倒をみる覚悟が必要です。</p>
+            </div>
+        </div>
+        <div class="accordion">
+            <h3 onclick="toggleAccordion(this)">ネコちゃんに出会う方法は？</h3>
+            <div class="content">
+                <p>ネコちゃんと出会う方法は、さまざまです。
+ネコちゃんを購入する場合は、動物取り扱い業の登録をしているショップで、かつきちんと動物に配慮した管理をしているショップから購入するようにしましょう。</p>
+            </div>
+        </div>
+        <div class="accordion">
+            <h3 onclick="toggleAccordion(this)">ネコちゃんを迎え入れる際の注意点</h3>
+            <div class="content">
+                <p>ネコちゃんを迎え入れる際は、飼い主さんのライフスタイルに合った猫種かどうかをあらかじめ確認しておきましょう。</p>
+            </div>
+        </div>
+        
+        <div class="form">
+            <h3>コンタクトフォーム</h3>
+            <div class="form-group">
+                <label for="name">名前</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="message">メッセージ</label>
+                <textarea id="message" name="message"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="showToast()">送信</button>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>ここにモーダルウィンドウの内容が表示されます。</p>
+        </div>
+    </div>
+    <div id="toast" class="toast">メッセージが送信されました！</div>
+    <footer class="footer">
+        <p>&copy; 2024 ウェブページ</p>
+    </footer>
+
+    <script>
+        function toggleAccordion(element) {
+            element.parentNode.classList.toggle('active');
+        }
+
+        function openModal() {
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        function toggleMenu() {
+            document.querySelector('nav .menu').classList.toggle('active');
+        }
+
+        function showToast() {
+            let toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        function openTab(event, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.querySelectorAll(".tabs nav a");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.className += " active";
+        }
+
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+    </script>
+</body>
+</html>
