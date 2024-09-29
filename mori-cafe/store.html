@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>森のカフェ - 店舗情報</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts の追加 -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="logo">
+            <a href="index.html">森のカフェ</a>
+        </div>
+        <nav class="navbar">
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="menu.html">メニュー</a></li>
+                <li><a href="store.html" class="active">店舗情報</a></li>
+                <li><a href="contact.html">問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main>
+        <!-- 店舗情報のコンテンツ -->
+        <section class="store-info">
+            <h2>店舗情報</h2>
+            <p><strong>所在地:</strong> 東京都新宿区西新宿2-8-1</p>
+            <p><strong>営業時間:</strong> 10:00 AM - 10:00 PM</p>
+            <p><strong>定休日:</strong> 火曜日、水曜日</p>
+            <p><strong>電話番号:</strong> 03-9876-5432</p>
+            <div class="map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.123456789!2d139.70000008446823!3d35.68948752519627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b6e7e7e7e7b%3A0xabcdef1234567890!2z44CSMTMwLTAwMDAg5LiA5aSn55yM5LiB55uu77yR77yU!5e0!3m2!1sja!2sjp!4v1680000000000!5m2!1sja!2sjp" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <!-- 開店スケジュール -->
+            <div class="opening-hours">
+                <h3>開店スケジュール</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>曜日</th>
+                            <th>営業時間</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>月曜日</td>
+                            <td>10:00 AM - 10:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>火曜日</td>
+                            <td>定休日</td>
+                        </tr>
+                        <tr>
+                            <td>水曜日</td>
+                            <td>定休日</td>
+                        </tr>
+                        <tr>
+                            <td>木曜日</td>
+                            <td>10:00 AM - 10:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>金曜日</td>
+                            <td>10:00 AM - 11:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>土曜日</td>
+                            <td>10:00 AM - 11:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>日曜日</td>
+                            <td>10:00 AM - 10:00 PM</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- 予約ボタン -->
+                <a href="contact.html" class="reservation-button">予約する</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer>
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="menu.html">メニュー</a></li>
+            <li><a href="store.html">店舗情報</a></li>
+            <li><a href="contact.html">問い合わせ</a></li>
+        </ul>
+        <br>
+        <p>&copy; 2024 森のカフェ</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
